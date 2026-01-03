@@ -24,7 +24,12 @@ export default function Dashboard({ isLoggedIn, setIsLoggedIn }) {
         console.log("error: ", error?.response?.data?.error);
       }
     };
-    if(!isLoggedIn) return;
+    if (!isLoggedIn) {
+      setTxn([]);
+      setIncome("");
+      setExpense("");
+      setBalance("");
+    }
     getData();
   }, [isLoggedIn]);
   console.log("txn: ", txn);
