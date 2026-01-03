@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { api } from "../utils/api.js";
+import api from "../utils/api.js";
 
 export default function Auth() {
   const [isLogin, setIsLogin] = useState(true);
@@ -13,29 +13,34 @@ export default function Auth() {
   //auth
   const handleAuth = async (e) => {
     e.preventDefault();
-    isLogin
-      ? (async () => {
-          try {
-            console.log("login: ", data);
-            const res = await api.post("/auth/login", data);
-            console.log("login: ", res.data);
-            localStorage.setItem("token", res.data.token);
-            console.log("token set: ", res.data.token)
-            navigate("/dashboard");
-          } catch (e) {
-            console.log(e.response?.data);
-          }
-        })()
-      : (async () => {
-          try {
-            console.log("register: ", data);
-            const res = await api.post("/auth/register", data);
-            console.log(res.data);
-          } catch (e) {
-            console.log(e.response?.data || e.message);
-            setIsLogin(true)
-          }
-        })();
+    if (isLogin) {
+      try {
+        console.log("login: ", data);
+        const res = await api.post("/auth/login", data);
+        console.log("login: ", res.data);
+        localStorage.setItem("token", res.data.token);
+        console.log("token set: ", res.data.token);
+        navigate("/dashboard");
+      } catch (e) {
+        if (e?.status === 500) {
+          console.log("go to register");
+
+          alert(e?.response?.data?.error);
+          setIsLogin(false);
+        }
+        console.log(e.status);
+      }
+    } else {
+      try {
+        console.log("register: ", data);
+        const res = await api.post("/auth/register", data);
+        console.log(res.data);
+        setIsLogin(true)
+      } catch (e) {
+        console.log(e.response?.data || e.message);
+        setIsLogin(true);
+      }
+    }
   };
 
   return (
@@ -44,9 +49,23 @@ export default function Auth() {
         <div className="col-md-6 col-lg-4">
           <div className="card shadow">
             <div className="card-body p-4">
-              <h3 className="card-title text-center mb-4">
-                {isLogin ? "Login" : "Register"}
-              </h3>
+              <div className="d-flex justify-content-evenly my-2">
+                <button
+                  onClick={() => setIsLogin(!isLogin)}
+                  className="btn btn-outline-primary"
+                  disabled={isLogin}
+                >
+                  Login
+                </button>
+                <button
+                  onClick={() => setIsLogin(!isLogin)}
+                  className="btn btn-outline-primary"
+                  disabled={!isLogin}
+                >
+                  Sign Up
+                </button>
+              </div>
+
               {/* form */}
               <form onSubmit={handleAuth}>
                 {!isLogin && (

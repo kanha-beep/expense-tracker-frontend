@@ -4,6 +4,4 @@ const api = axios.create({
     baseURL: VITE_URL,
     withCredentials: true
 });
-
-export { api };
 export default api;
