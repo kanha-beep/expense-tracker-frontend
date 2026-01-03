@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../utils/api";
 
-export default function Navbar({ setIsLoggedIn }) {
+export default function Navbar({ setIsLoggedIn, isLoggedIn }) {
   const [isLogin, setIsLogin] = useState(false);
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
@@ -40,7 +40,7 @@ export default function Navbar({ setIsLoggedIn }) {
           id="navbarNav"
         >
           <div className="navbar-nav ms-auto">
-            {isLogin ? (
+            {isLoggedIn ? (
               <>
                 <Link
                   className="nav-link"

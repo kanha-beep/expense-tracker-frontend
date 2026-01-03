@@ -29,7 +29,7 @@ export default function App() {
   }, []);
   return (
     <div className="container-fluid">
-      <Navbar setIsLoggedIn={setIsLoggedIn} />
+      <Navbar setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn}/>
       <div className="container mt-4">
         <Routes>
           <Route path="/" element={<Home />} />
