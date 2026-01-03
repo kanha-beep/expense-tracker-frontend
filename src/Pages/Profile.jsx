@@ -2,20 +2,8 @@ import { useState } from "react";
 import React, { useEffect } from "react";
 import api from "../utils/api";
 
-export default function Profile() {
-  const [user, setUser] = useState({});
-  useEffect(() => {
-    const getUserDetails = async () => {
-      try {
-        const res = await api.get("/auth/me");
-        // console.log("user details: ", res.data);
-        setUser(res.data);
-      } catch (error) {
-        console.log("error user: ", error?.response?.data?.error);
-      }
-    };
-    getUserDetails();
-  }, []);
+export default function Profile({ user }) {
+  // console.log("user: ", user)
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUser((p) => ({ ...p, [name]: value }));
@@ -70,7 +58,7 @@ export default function Profile() {
                         className="form-control"
                         type="text"
                         name="name"
-                        value={user.name}
+                        value={user?.name}
                         onChange={handleChange}
                       />
                     </div>
@@ -80,7 +68,7 @@ export default function Profile() {
                         className="form-control"
                         type="email"
                         name="email"
-                        value={user.email}
+                        value={user?.email}
                         onChange={handleChange}
                       />
                     </div>

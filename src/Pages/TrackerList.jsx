@@ -4,15 +4,10 @@ import api from "../utils/api.js";
 import { Link } from "react-router-dom";
 export default function TrackerList() {
   const [tracker, setTracker] = useState([]);
-  const token = localStorage.getItem("token");
   useEffect(() => {
     const getAllTracker = async () => {
       try {
-        const res = await api.get("/tracker", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const res = await api.get("/tracker");
         console.log("1. All Tracker:", res.data);
         setTracker(res.data.txn);
       } catch (e) {
@@ -20,15 +15,11 @@ export default function TrackerList() {
       }
     };
     getAllTracker();
-  }, [token]);
+  }, []);
   const handleFilter = async (category = "All") => {
     console.log("category send: ", category);
     try {
-      const res = await api.get(`/tracker?category=${category}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await api.get(`/tracker?category=${category}`);
       // console.log("res: ", res?.data?.);
       setTracker(res.data.txn);
     } catch (e) {
@@ -40,7 +31,7 @@ export default function TrackerList() {
   };
   useEffect(() => {
     handleFilter("All");
-  }, [token]);
+  }, []);
 
   return (
     <div className="row">
@@ -59,7 +50,13 @@ export default function TrackerList() {
         </div>
         <ul className="list-group">
           {tracker &&
-            tracker.map((t) => <TrackerItems key={t._id} amount={t} onDelete={handleDeleteFromUI}/>)}
+            tracker.map((t) => (
+              <TrackerItems
+                key={t._id}
+                amount={t}
+                onDelete={handleDeleteFromUI}
+              />
+            ))}
         </ul>
       </div>
     </div>

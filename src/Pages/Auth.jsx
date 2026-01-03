@@ -18,8 +18,6 @@ export default function Auth() {
         console.log("login: ", data);
         const res = await api.post("/auth/login", data);
         console.log("login: ", res.data);
-        localStorage.setItem("token", res.data.token);
-        console.log("token set: ", res.data.token);
         navigate("/dashboard");
       } catch (e) {
         if (e?.status === 500) {
