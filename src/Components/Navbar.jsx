@@ -8,10 +8,10 @@ export default function Navbar({ isLogin }) {
   // console.log("isLogin navbar: ", isLogin)
   const handleLogout = async () => {
     try {
-      console.log("starts")
+      console.log("starts");
       const res = await api.post("/api/auth/logout");
       console.log(res?.data);
-      navigate("/auth")
+      navigate("/auth", { replace: true });
       setIsOpen(false);
     } catch (err) {
       console.log(err?.response?.data);
