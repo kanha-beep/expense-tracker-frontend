@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../utils/api";
 
-export default function Navbar({ isLogin }) {
+export default function Navbar({ setIsLoggedIn }) {
+  const [isLogin, setIsLogin] = useState(false);
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   // console.log("isLogin navbar: ", isLogin)
@@ -13,8 +14,11 @@ export default function Navbar({ isLogin }) {
       console.log(res?.data);
       navigate("/auth", { replace: true });
       setIsOpen(false);
+      setIsLogin(false);
+      setIsLoggedIn(false);
     } catch (err) {
       console.log(err?.response?.data);
+      setIsLoggedIn(true)
     }
   };
   return (

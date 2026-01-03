@@ -5,7 +5,7 @@ import TotalIncome from "./TotalIncome";
 import TotalExpense from "./TotalExpense";
 import TotalBalance from "./TotalBalance";
 
-export default function Dashboard({ isLogin, setIsLogin }) {
+export default function Dashboard({ isLoggedIn, setIsLoggedIn }) {
   const [txn, setTxn] = useState([]);
   const [income, setIncome] = useState("");
   const [expense, setExpense] = useState("");
@@ -29,7 +29,7 @@ export default function Dashboard({ isLogin, setIsLogin }) {
   console.log("txn: ", txn);
   return (
     <div className="container mt-4">
-      {isLogin === false ? (
+      {isLoggedIn === false ? (
         <div className="alert alert-danger" role="alert">
           Please login to access the dashboard.
         </div>

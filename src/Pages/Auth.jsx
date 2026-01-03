@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../utils/api.js";
-import { set } from "mongoose";
-
-export default function Auth() {
+export default function Auth({ setIsLoggedIn }) {
   const [isLogin, setIsLogin] = useState(true);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -22,15 +20,19 @@ export default function Auth() {
         const res = await api.post("/api/auth/login", data);
         console.log("login: ", res.data);
         navigate("/dashboard", { replace: true });
+        setLoading(false);
+        setIsLoggedIn(true);
       } catch (e) {
         if (e?.status === 500) {
           console.log("go to register");
 
           alert(e?.response?.data?.error);
-          setIsLogin(false);
+
+          setIsLoggedIn(false);
         }
         console.log(e.status);
         setLoading(false);
+        setIsLoggedIn(false);
       }
     } else {
       try {
@@ -38,11 +40,11 @@ export default function Auth() {
         console.log("register: ", data);
         const res = await api.post("/api/auth/register", data);
         console.log(res.data);
-        setIsLogin(true);
+        setIsLoggedIn(true);
       } catch (e) {
         console.log(e.response?.data || e.message);
-        setIsLogin(true);
         setLoading(false);
+        setIsLoggedIn(false);
       }
     }
   };

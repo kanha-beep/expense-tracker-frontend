@@ -12,12 +12,12 @@ import Home from "./Pages/Home.jsx";
 import MonthlyReport from "./Pages/MonthlyReport.jsx";
 import api from "./utils/api.js";
 export default function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
-  const [isLogin, setIsLogin] = useState(false);
   const checkAuth = async () => {
     try {
       const res = await api.get("/api/auth/me");
-      setUser(res?.data)
+      setUser(res?.data);
       setIsLogin(true);
     } catch (e) {
       console.log(e?.response?.data?.message);
@@ -27,22 +27,21 @@ export default function App() {
   useEffect(() => {
     checkAuth();
   }, []);
-  const handleAdd = (expense) => setExpenses((prev) => [...prev, expense]);
   return (
     <div className="container-fluid">
-      <Navbar isLogin={isLogin} setIsLogin={setIsLogin} />
+      <Navbar setIsLoggedIn={setIsLoggedIn} />
       <div className="container mt-4">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route
             path="/dashboard"
-            element={<Dashboard isLogin={isLogin} setIsLogin={setIsLogin} />}
+            element={<Dashboard isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />}
           />
           <Route
             path="/auth"
-            element={<Auth isLogin={isLogin} setIsLogin={setIsLogin} />}
+            element={<Auth isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />}
           />
-          <Route path="/profile" element={<Profile user={user}/>} />
+          <Route path="/profile" element={<Profile user={user} />} />
           <Route path="/tracker" element={<TrackerList />} />
           <Route path="/tracker/new" element={<TrackerForm />} />
           <Route path="/monthly-report" element={<MonthlyReport />} />
