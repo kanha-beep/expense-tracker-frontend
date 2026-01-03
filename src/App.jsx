@@ -18,10 +18,10 @@ export default function App() {
     try {
       const res = await api.get("/api/auth/me");
       setUser(res?.data);
-      setIsLogin(true);
+      setIsLoggedIn(true);
     } catch (e) {
       console.log(e?.response?.data?.message);
-      setIsLogin(false);
+      setIsLoggedIn(false);
     }
   };
   useEffect(() => {
