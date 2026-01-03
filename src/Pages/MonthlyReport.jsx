@@ -8,7 +8,7 @@ export default function MonthlyReport() {
   useEffect(() => {
     const getAllTxn = async () => {
       try {
-        const res = await api.get("/tracker");
+        const res = await api.get("/api/tracker");
         console.log("all txn for report: ", res?.data?.report);
         setAllTxn(res.data?.txn);
         setReport(res.data?.report);

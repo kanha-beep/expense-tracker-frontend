@@ -6,7 +6,7 @@ export default function ExpenseItem({ amount, onDelete }) {
     if (amount.type === "expense") setColor(false);
   }, []);
   const handleDelete = async (i) => {
-    const res = await api.delete(`/tracker/${i}`);
+    const res = await api.delete(`/api/tracker/${i}`);
     console.log("deleted: ", res?.data);
     onDelete(i);
   };

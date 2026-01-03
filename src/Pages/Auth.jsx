@@ -16,9 +16,9 @@ export default function Auth() {
     if (isLogin) {
       try {
         console.log("login: ", data);
-        const res = await api.post("/auth/login", data);
+        const res = await api.post("/api/auth/login", data);
         console.log("login: ", res.data);
-        navigate("/dashboard");
+        navigate("/dashboard", { replace: true });
       } catch (e) {
         if (e?.status === 500) {
           console.log("go to register");
@@ -31,9 +31,9 @@ export default function Auth() {
     } else {
       try {
         console.log("register: ", data);
-        const res = await api.post("/auth/register", data);
+        const res = await api.post("/api/auth/register", data);
         console.log(res.data);
-        setIsLogin(true)
+        setIsLogin(true);
       } catch (e) {
         console.log(e.response?.data || e.message);
         setIsLogin(true);

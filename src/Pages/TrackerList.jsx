@@ -7,7 +7,7 @@ export default function TrackerList() {
   useEffect(() => {
     const getAllTracker = async () => {
       try {
-        const res = await api.get("/tracker");
+        const res = await api.get("/api/tracker");
         console.log("1. All Tracker:", res.data);
         setTracker(res.data.txn);
       } catch (e) {
@@ -19,7 +19,7 @@ export default function TrackerList() {
   const handleFilter = async (category = "All") => {
     console.log("category send: ", category);
     try {
-      const res = await api.get(`/tracker?category=${category}`);
+      const res = await api.get(`/api/tracker?category=${category}`);
       // console.log("res: ", res?.data?.);
       setTracker(res.data.txn);
     } catch (e) {

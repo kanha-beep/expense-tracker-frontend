@@ -1,9 +1,22 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import api from "../utils/api";
 
 export default function Navbar({ isLogin }) {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   // console.log("isLogin navbar: ", isLogin)
+  const handleLogout = async () => {
+    try {
+      console.log("starts")
+      const res = await api.post("/api/auth/logout");
+      console.log(res?.data);
+      navigate("/auth")
+      setIsOpen(false);
+    } catch (err) {
+      console.log(err?.response?.data);
+    }
+  };
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <div className="container">
@@ -42,9 +55,7 @@ export default function Navbar({ isLogin }) {
                 <button
                   className="btn btn-outline-light ms-2"
                   onClick={() => {
-                    localStorage.removeItem("token");
-                    window.location.href = "/auth";
-                    setIsOpen(false);
+                    handleLogout();
                   }}
                 >
                   Logout

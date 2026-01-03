@@ -12,7 +12,7 @@ export default function Profile({ user }) {
     e.preventDefault();
     console.log("clock ho ghya");
     try {
-      const res = await api.patch("/auth/me/edit", user);
+      const res = await api.patch("/api/auth/me/edit", user);
       console.log("user details: ", res.data);
       window.location.href = "/dashboard";
     } catch (error) {

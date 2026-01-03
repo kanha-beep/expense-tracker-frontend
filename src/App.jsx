@@ -16,7 +16,7 @@ export default function App() {
   const [isLogin, setIsLogin] = useState(false);
   const checkAuth = async () => {
     try {
-      const res = await api.get("/auth/me");
+      const res = await api.get("/api/auth/me");
       setUser(res?.data)
       setIsLogin(true);
     } catch (e) {

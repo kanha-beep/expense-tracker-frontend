@@ -14,7 +14,7 @@ export default function Dashboard({ isLogin, setIsLogin }) {
   useEffect(() => {
     const getData = async () => {
       try {
-        const res = await api.get("/tracker");
+        const res = await api.get("/api/tracker");
         console.log("all txns: ", res.data);
         setIncome(res.data.totalIncome);
         setExpense(res.data.totalExpense);

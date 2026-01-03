@@ -23,7 +23,7 @@ export default function TrackerForm({ onAdd }) {
   const handleAmount = async (e) => {
     e.preventDefault();
     try {
-      const res = await api.post("/tracker/new", data);
+      const res = await api.post("/api/tracker/new", data);
       console.log("added expense: ", res.data);
       setData({
         title: "",
