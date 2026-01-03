@@ -29,19 +29,34 @@ export default function App() {
   }, []);
   return (
     <div className="container-fluid">
-      <Navbar setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn}/>
+      <Navbar setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />
       <div className="container mt-4">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route
             path="/dashboard"
-            element={<Dashboard isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />}
+            element={
+              <Dashboard
+                isLoggedIn={isLoggedIn}
+                setIsLoggedIn={setIsLoggedIn}
+              />
+            }
           />
           <Route
             path="/auth"
-            element={<Auth isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} checkAuth={checkAuth} setUser={setUser}/>}
+            element={
+              <Auth
+                isLoggedIn={isLoggedIn}
+                setIsLoggedIn={setIsLoggedIn}
+                checkAuth={checkAuth}
+                setUser={setUser}
+              />
+            }
           />
-          <Route path="/profile" element={<Profile user={user} />} />
+          <Route
+            path="/profile"
+            element={<Profile user={user} setUser={setUser} />}
+          />
           <Route path="/tracker" element={<TrackerList />} />
           <Route path="/tracker/new" element={<TrackerForm />} />
           <Route path="/monthly-report" element={<MonthlyReport />} />

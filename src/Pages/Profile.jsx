@@ -2,7 +2,7 @@ import { useState } from "react";
 import React, { useEffect } from "react";
 import api from "../utils/api";
 
-export default function Profile({ user }) {
+export default function Profile({ user, setUser }) {
   console.log("user: ", user)
   const handleChange = (e) => {
     const { name, value } = e.target;

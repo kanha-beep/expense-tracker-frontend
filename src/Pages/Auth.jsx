@@ -26,12 +26,11 @@ export default function Auth({ setIsLoggedIn, checkAuth , setUser}) {
       } catch (e) {
         if (e?.status === 500) {
           console.log("go to register");
-
           alert(e?.response?.data?.error);
-
           setIsLoggedIn(false);
         }
         console.log(e.status);
+        setIsLogin(false)
         setLoading(false);
         setIsLoggedIn(false);
         setUser(false)
@@ -46,6 +45,7 @@ export default function Auth({ setIsLoggedIn, checkAuth , setUser}) {
         setIsLoggedIn(true);
       } catch (e) {
         console.log(e.response?.data || e.message);
+        setIsLogin(false)
         setLoading(false);
         setIsLoggedIn(false);
         setUser(false)
