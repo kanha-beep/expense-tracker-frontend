@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../utils/api.js";
-export default function Auth({ setIsLoggedIn, checkAuth , setUser}) {
+export default function Auth({ setIsLoggedIn, checkAuth, setUser }) {
   const [isLogin, setIsLogin] = useState(true);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -19,10 +19,10 @@ export default function Auth({ setIsLoggedIn, checkAuth , setUser}) {
         console.log("login: ", data);
         const res = await api.post("/api/auth/login", data);
         console.log("login: ", res.data);
+        await checkAuth();
         navigate("/dashboard", { replace: true });
         setLoading(false);
         setIsLoggedIn(true);
-        await checkAuth();
       } catch (e) {
         if (e?.status === 500) {
           console.log("go to register");
@@ -30,10 +30,10 @@ export default function Auth({ setIsLoggedIn, checkAuth , setUser}) {
           setIsLoggedIn(false);
         }
         console.log(e.status);
-        setIsLogin(false)
+        setIsLogin(false);
         setLoading(false);
         setIsLoggedIn(false);
-        setUser(false)
+        setUser(false);
       }
     } else {
       try {
@@ -41,14 +41,15 @@ export default function Auth({ setIsLoggedIn, checkAuth , setUser}) {
         console.log("register: ", data);
         const res = await api.post("/api/auth/register", data);
         console.log(res.data);
+        await checkAuth();
         navigate("/dashboard", { replace: true });
         setIsLoggedIn(true);
       } catch (e) {
         console.log(e.response?.data || e.message);
-        setIsLogin(false)
+        setIsLogin(false);
         setLoading(false);
         setIsLoggedIn(false);
-        setUser(false)
+        setUser(false);
       }
     }
   };
