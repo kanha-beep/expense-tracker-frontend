@@ -24,8 +24,9 @@ export default function Dashboard({ isLoggedIn, setIsLoggedIn }) {
         console.log("error: ", error?.response?.data?.error);
       }
     };
+    if(!isLoggedIn) return;
     getData();
-  }, []);
+  }, [isLoggedIn]);
   console.log("txn: ", txn);
   return (
     <div className="container mt-4">

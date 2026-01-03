@@ -39,7 +39,7 @@ export default function App() {
           />
           <Route
             path="/auth"
-            element={<Auth isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />}
+            element={<Auth isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} checkAuth={checkAuth}/>}
           />
           <Route path="/profile" element={<Profile user={user} />} />
           <Route path="/tracker" element={<TrackerList />} />
