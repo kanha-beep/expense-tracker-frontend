@@ -27,10 +27,6 @@ export default function Dashboard({ isLogin, setIsLogin }) {
     getData();
   }, []);
   console.log("txn: ", txn);
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) setIsLogin(true);
-  }, []);
   return (
     <div className="container mt-4">
       {isLogin === false ? (
