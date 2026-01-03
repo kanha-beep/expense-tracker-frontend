@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import api from "../utils/api";
 
 export default function Profile({ user }) {
-  // console.log("user: ", user)
+  console.log("user: ", user)
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUser((p) => ({ ...p, [name]: value }));

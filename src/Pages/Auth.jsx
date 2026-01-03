@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../utils/api.js";
-export default function Auth({ setIsLoggedIn, checkAuth }) {
+export default function Auth({ setIsLoggedIn, checkAuth , setUser}) {
   const [isLogin, setIsLogin] = useState(true);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -34,6 +34,7 @@ export default function Auth({ setIsLoggedIn, checkAuth }) {
         console.log(e.status);
         setLoading(false);
         setIsLoggedIn(false);
+        setUser(false)
       }
     } else {
       try {
@@ -47,6 +48,7 @@ export default function Auth({ setIsLoggedIn, checkAuth }) {
         console.log(e.response?.data || e.message);
         setLoading(false);
         setIsLoggedIn(false);
+        setUser(false)
       }
     }
   };
