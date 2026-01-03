@@ -5,7 +5,7 @@ import { set } from "mongoose";
 
 export default function Auth() {
   const [isLogin, setIsLogin] = useState(true);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [data, setData] = useState({ name: "", email: "", password: "" });
   const handleChange = (e) => {
@@ -14,7 +14,7 @@ export default function Auth() {
   console.log("isLogin Auth", isLogin);
   //auth
   const handleAuth = async (e) => {
-    setLoading(true)
+    setLoading(true);
     e.preventDefault();
     if (isLogin) {
       try {
@@ -30,11 +30,11 @@ export default function Auth() {
           setIsLogin(false);
         }
         console.log(e.status);
-        setLoading(false)
+        setLoading(false);
       }
     } else {
       try {
-        setLoading(true)
+        setLoading(true);
         console.log("register: ", data);
         const res = await api.post("/api/auth/register", data);
         console.log(res.data);
@@ -42,7 +42,7 @@ export default function Auth() {
       } catch (e) {
         console.log(e.response?.data || e.message);
         setIsLogin(true);
-        setLoading(false)
+        setLoading(false);
       }
     }
   };
@@ -108,7 +108,29 @@ export default function Auth() {
                   />
                 </div>
                 <button className="btn btn-primary w-100 mb-3" type="submit">
-                  {isLogin ? "Login" : "Register"}
+                  {isLogin ? (
+                    <>
+                      {loading ? (
+                        <>
+                          <div className="spinner-border spinner-border-sm" />
+                          "Login..."
+                        </>
+                      ) : (
+                        "Login"
+                      )}
+                    </>
+                  ) : (
+                    <>
+                      {loading ? (
+                        <>
+                          <div className="spinner-border spinner-border-sm" />
+                          "Register..."
+                        </>
+                      ) : (
+                        "Register"
+                      )}
+                    </>
+                  )}
                 </button>
               </form>
               <div className="text-center">
